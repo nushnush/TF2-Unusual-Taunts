@@ -142,7 +142,7 @@ void CreateRequest()
 	Steam_SendHTTPRequest(request, OnHTTPResponse);
 }
 
-public int OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatusCode eStatusCode) 
+public void OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatusCode eStatusCode) 
 {
 	if (!successful || eStatusCode != HTTPStatusCode_OK)
 	{
