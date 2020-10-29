@@ -15,6 +15,7 @@ Do you want unusual taunts? We got some.
 # Requirements / Dependencies:
 
 * [SteamTools](https://forums.alliedmods.net/showthread.php?t=236206)
+* [Valid Steam API Key](https://steamcommunity.com/dev/apikey)
 
 # Installation:
 
