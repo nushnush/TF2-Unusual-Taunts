@@ -5,7 +5,7 @@
 #include <steamtools>
 
 #define STEAM_API_KEY "NAN"
-#define IS_SCREAM_FORTRESS(%1) (3037 <= %1 <= 3045)
+#define IS_BUGGY(%1) (3014 <= %1 <= 3016 || %1 == 3021 || %1 == 3022 || 3037 <= %1 <= 3045)
 
 #pragma dynamic 320789
 #pragma newdecls required
