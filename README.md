@@ -7,6 +7,11 @@ Do you want unusual taunts? We got some.
 * Auto updates taunt list every map change.
 * It has unusual taunts! Duh.
 
+# Commands:
+
+* ```!utaunt``` - Opens the Unusual Taunt Effects Menu.
+* ```!unusualtaunt``` - Same as above.
+
 # Requirements / Dependencies:
 
 * [SteamTools](https://forums.alliedmods.net/showthread.php?t=236206)
