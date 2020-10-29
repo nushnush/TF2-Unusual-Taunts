@@ -183,7 +183,7 @@ public void OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatu
 
 		int defIndex = kv.GetNum("id");
 
-		if(IS_SCREAM_FORTRESS(defIndex))
+		if(IS_BUGGY(defIndex))
 		{
 			continue;
 		}
