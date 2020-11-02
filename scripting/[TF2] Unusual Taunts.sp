@@ -158,8 +158,9 @@ void CreateRequest()
 
 public void OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatusCode eStatusCode) 
 {
-	if (!successful || eStatusCode != HTTPStatusCode_OK)
+	if (!successful || eStatusCode >= HTTPStatusCode_BadRequest)
 	{
+		LogError("Could not fetch unusual taunts (HTTP status %d)", eStatusCode);
 		Steam_ReleaseHTTPRequest(request);
 		hadError = true;
 
