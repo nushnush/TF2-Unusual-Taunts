@@ -19,7 +19,7 @@ Do you want unusual taunts? We got some.
 
 # Installation:
 1. Make sure you have all the dependecies installed before your download the plugin.
-2. [Click here](https://github.com/nushnush/TF2-Unusual-Taunts/releases/download/1.0.1/unusual-taunts-1.0.1.zip) to download the plugin.
+2. [Click here](https://github.com/nushnush/TF2-Unusual-Taunts/releases/download/v1.0.2/unusual-taunts-1.0.2.zip) to download the plugin.
 3. Extract the files into ```tf/addons/sourcemod```.
 4. Open ```[TF2] Unusual Taunts.sp``` Using notepad.
 5. Change ```#define STEAM_API_KEY "NAN"``` to ```#define STEAM_API_KEY "YOUR_STEAM_API_KEY"``` ([Can Be Found Here](https://steamcommunity.com/dev/apikey)).
