@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-#include <sdktools>
+#include <sourcemod>
 #include <tf2_stocks>
 #include <steamtools>
 
@@ -11,7 +11,8 @@
 #pragma newdecls required
 
 ArrayList g_utaunts_id, g_utaunts_classname, g_utaunts_name;
-int g_iTauntEffect[MAXPLAYERS + 1], g_iTauntParticle[MAXPLAYERS + 1];
+int g_iTauntEffect[MAXPLAYERS + 1], g_iTauntParticle[MAXPLAYERS + 1], tryCount;
+bool hadError;
 
 public Plugin myinfo =
 {
@@ -30,6 +31,7 @@ public void OnPluginStart()
 
 public void OnConfigsExecuted()
 {
+	tryCount = 0;
 	CreateRequest();
 }
 
@@ -38,6 +40,18 @@ public Action Command_TauntEffect(int client, int args)
 	if (!client)
 	{
 		ReplyToCommand(client, "[SM] This command is available in-game only!");
+		return Plugin_Handled;
+	}
+
+	if(!strcmp(STEAM_API_KEY, "NAN"))
+	{
+		ReplyToCommand(client, "[SM] The owner did not define a valid STEAM API KEY.");
+		return Plugin_Handled;
+	}
+
+	if(hadError)
+	{
+		ReplyToCommand(client, "[SM] There was an error with the server's HTTP Request, try again later.");
 		return Plugin_Handled;
 	}
 
@@ -147,8 +161,18 @@ public void OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatu
 	if (!successful || eStatusCode != HTTPStatusCode_OK)
 	{
 		Steam_ReleaseHTTPRequest(request);
+		hadError = true;
+
+		if (tryCount < 10)
+		{
+			CreateTimer(30.0, TryAgain, _, TIMER_FLAG_NO_MAPCHANGE); // too many requests in a small interval can generate HTTP errors too
+		}
+
 		return;
 	}
+
+	hadError = false;
+	tryCount = 0;
 
 	int len = Steam_GetHTTPResponseBodySize(request);
 	char[] response = new char[len];
@@ -199,6 +223,15 @@ public void OnHTTPResponse(HTTPRequestHandle request, bool successful, HTTPStatu
 	kv.Rewind();
 	delete kv;
 	Steam_ReleaseHTTPRequest(request);
+}
+
+public Action TryAgain(Handle timer)
+{
+	if(hadError)
+	{
+		tryCount++;
+		CreateRequest();
+	}
 }
 
 bool IsInt(const char[] str, const int len)
